@@ -16,7 +16,15 @@
             "main": "src/main.ts",
             "tsConfig": "./tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
-            "assets": ["src/assets", "src/favicon.ico"],
+            "assets": [
+              "src/assets",
+              "src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce",
+                "output": "/tinymce/"
+              }
+            ],
             "styles": ["src/styles.scss"],
             "scripts": [],
             "aot": false,

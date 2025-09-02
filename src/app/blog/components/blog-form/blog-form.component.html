@@ -71,22 +71,22 @@
         <!-- Tags -->
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Tags</mat-label>
-          <mat-chip-list #chipList aria-label="Blog tags">
-            <mat-chip
+          <mat-chip-grid #chipList aria-label="Blog tags">
+            <mat-chip-row
               *ngFor="let tag of tags"
               [removable]="true"
               (removed)="removeTag(tag)"
             >
               {{ tag }}
               <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
+            </mat-chip-row>
             <input
               placeholder="Add tags..."
               [matChipInputFor]="chipList"
               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
               (matChipInputTokenEnd)="addTag($event)"
             />
-          </mat-chip-list>
+          </mat-chip-grid>
         </mat-form-field>
 
         <!-- Content -->

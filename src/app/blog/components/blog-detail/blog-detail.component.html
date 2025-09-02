@@ -5,7 +5,7 @@
       <mat-card-subtitle>
         <div class="blog-meta">
           <span class="author"
-            >By {{ blog.author?.username || 'Unknown' }}</span
+            >By {{ blog.author?.fullname || 'Unknown' }}</span
           >
           <span class="date">{{ blog.publishedAt | date : 'medium' }}</span>
           <span class="views">{{ blog.views }} views</span>
@@ -15,25 +15,25 @@
 
     <mat-card-content>
       <div class="blog-categories" *ngIf="blog.categories?.length">
-        <mat-chip-list>
+        <mat-chip-set>
           <mat-chip
             *ngFor="let category of blog.categories"
             [style.background-color]="category.color || '#e0e0e0'"
           >
             {{ category.name }}
           </mat-chip>
-        </mat-chip-list>
+        </mat-chip-set>
       </div>
 
       <div class="blog-content" [innerHTML]="blog.content"></div>
 
       <div class="blog-tags" *ngIf="blog.tags?.length">
         <h4>Tags:</h4>
-        <mat-chip-list>
+        <mat-chip-set>
           <mat-chip *ngFor="let tag of blog.tags">
             {{ tag }}
           </mat-chip>
-        </mat-chip-list>
+        </mat-chip-set>
       </div>
     </mat-card-content>
 

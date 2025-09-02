@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable, BehaviorSubject, firstValueFrom, of } from 'rxjs';
-import { tap, pluck, catchError } from 'rxjs/operators';
+import { tap, map, catchError } from 'rxjs/operators';
 
 import { User } from '@app/shared/interfaces';
 
@@ -27,7 +27,7 @@ export class AuthService {
           this.setUser(user);
           this.tokenStorage.saveToken(token);
         }),
-        pluck('user')
+        map(({ user }) => user)
       );
   }
 
@@ -49,7 +49,7 @@ export class AuthService {
           this.setUser(user);
           this.tokenStorage.saveToken(token);
         }),
-        pluck('user')
+        map(({ user }) => user)
       );
   }
 
@@ -68,7 +68,7 @@ export class AuthService {
   me(): Observable<User | null> {
     return this.http.get<AuthResponse>('/api/auth/me').pipe(
       tap(({ user }) => this.setUser(user)),
-      pluck('user'),
+      map(({ user }) => user),
       catchError(() => of(null))
     );
   }

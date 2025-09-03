@@ -19,6 +19,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   exports: [
@@ -42,6 +47,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatExpansionModule,
     MatFormFieldModule,
     MatProgressBarModule,
+    MatChipsModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatCheckboxModule,
   ],
 })
 export class SharedModule {}

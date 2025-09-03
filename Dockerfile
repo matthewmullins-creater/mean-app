@@ -11,4 +11,4 @@ RUN yarn build:prod
 USER node
 
 EXPOSE 4040
-CMD ["yarn", "start"]
+CMD ["yarn", "serve"]

@@ -35,7 +35,7 @@
       class="categories"
       *ngIf="blog.categories && blog.categories.length > 0"
     >
-      <mat-chip-set>
+      <mat-chip-listbox>
         <mat-chip
           *ngFor="let category of blog.categories"
           [style.background-color]="category.color"
@@ -44,12 +44,12 @@
         >
           {{ category.name }}
         </mat-chip>
-      </mat-chip-set>
+      </mat-chip-listbox>
     </div>
 
     <!-- Tags -->
     <div class="tags" *ngIf="blog.tags && blog.tags.length > 0">
-      <mat-chip-set>
+      <mat-chip-listbox>
         <mat-chip
           *ngFor="let tag of blog.tags"
           variant="outlined"
@@ -57,7 +57,7 @@
         >
           #{{ tag }}
         </mat-chip>
-      </mat-chip-set>
+      </mat-chip-listbox>
     </div>
   </mat-card-content>
 

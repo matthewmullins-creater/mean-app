@@ -357,6 +357,7 @@ async function toggleLike(req, res) {
       message: isLiked ? 'Blog post unliked' : 'Blog post liked',
       isLiked: !isLiked,
       likesCount: blog.likes.length,
+      likes: blog.likes,
     });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });

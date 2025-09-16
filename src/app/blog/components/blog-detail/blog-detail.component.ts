@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { ChangeDetectorRef } from '@angular/core';
 
 import { BlogService } from '../../../shared/services/blog.service';
 import { Blog } from '../../../shared/interfaces/blog.interface';
@@ -22,8 +21,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private blogService: BlogService,
-    private cdr: ChangeDetectorRef
+    private blogService: BlogService
   ) {}
 
   ngOnInit(): void {
@@ -67,10 +65,8 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (result: any) => {
           if (this.blog) {
-            console.log('Like result:', result);
             const likes = result?.likes ?? this.blog.likes;
             this.blog = { ...this.blog, likes };
-            this.cdr.markForCheck();
           }
           this.isLiking = false;
         },

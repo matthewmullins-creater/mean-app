@@ -73,7 +73,6 @@ export class BlogFormComponent implements OnInit, OnDestroy {
       .subscribe({
         next: categories => {
           this.categories = categories;
-          console.log('Categories loaded:', categories);
         },
         error: error => {
           console.error('Error loading categories:', error);

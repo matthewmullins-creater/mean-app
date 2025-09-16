@@ -40,13 +40,11 @@ export class BlogListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading$.next(true);
-    console.log('BlogListComponent: Fetching all blogs without filters');
 
     this.blogService.getBlogs({}).subscribe({
       next: response => {
         this.blogs$ = response;
         this.loading$.next(false);
-        console.log('BlogListComponent: Fetched blogs successfully:', response);
       },
       error: error => {
         console.error('BlogListComponent: Error fetching blogs:', error);
@@ -85,7 +83,6 @@ export class BlogListComponent implements OnInit {
     filters: BlogFilters
   ): Observable<PaginationResponse<Blog>> {
     this.loading$.next(true);
-    console.log('BlogListComponent: Making API call with filters:', filters);
 
     const params = this.route.snapshot.params;
     const queryParams = this.route.snapshot.queryParams;
@@ -99,13 +96,11 @@ export class BlogListComponent implements OnInit {
     } else if (queryParams['q']) {
       apiCall = this.blogService.searchBlogs(queryParams['q'], filters);
     } else {
-      console.log('BlogListComponent: Calling getBlogs for public access');
       apiCall = this.blogService.getBlogs(filters);
     }
 
     return apiCall.pipe(
       tap((response: any) => {
-        console.log('BlogListComponent: Raw API response:', response);
         this.loading$.next(false);
       }),
       catchError((error: any) => {

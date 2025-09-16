@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable, BehaviorSubject, firstValueFrom, of } from 'rxjs';
+import {
+  Observable,
+  BehaviorSubject,
+  firstValueFrom,
+  of,
+  iif,
+  defer,
+} from 'rxjs';
 import { tap, map, catchError } from 'rxjs/operators';
 
 import { User } from '@app/shared/interfaces';
@@ -67,7 +74,9 @@ export class AuthService {
 
   me(): Observable<User | null> {
     return this.http.get<AuthResponse>('/api/auth/me').pipe(
-      tap(({ user }) => this.setUser(user)),
+      tap(({ user }) => {
+        this.setUser(user);
+      }),
       map(({ user }) => user),
       catchError(() => of(null))
     );
@@ -88,6 +97,10 @@ export class AuthService {
    * thus we can ensure that the user is able to access the `/` (home) page.
    */
   checkTheUserOnTheFirstLoad(): Promise<User | null> {
-    return firstValueFrom(this.me());
+    const hasToken = (): boolean => {
+      const t = this.tokenStorage.getToken();
+      return !!(t && t !== 'null' && t !== 'undefined');
+    };
+    return firstValueFrom(defer(() => iif(hasToken, this.me(), of(null))));
   }
 }

@@ -146,12 +146,6 @@ export class BlogListComponent implements OnInit {
         console.error('BlogListComponent: Error fetching blogs:', error);
       },
     });
-
-    // this.router.navigate([], {
-    //   relativeTo: this.route,
-    //   queryParams,
-    //   queryParamsHandling: 'merge',
-    // });
   }
 
   trackByBlog(index: number, blog: Blog): string {

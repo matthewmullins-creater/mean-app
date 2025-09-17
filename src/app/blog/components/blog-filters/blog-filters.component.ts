@@ -63,10 +63,9 @@ export class BlogFiltersComponent implements OnInit {
         const filters: BlogFilters = {};
 
         if (value.sort) filters.sort = value.sort;
-        if (value.category) filters.category = value.category;
-        if (value.status) filters.status = value.status;
+        filters.category = value.category;
+        filters.status = value.status;
         if (value.featured) filters.featured = value.featured;
-
         this.filtersChange.emit(filters);
       });
   }

@@ -135,12 +135,23 @@ export class BlogListComponent implements OnInit {
     if (filters.sort && filters.sort !== 'newest')
       queryParams.sort = filters.sort;
     if (filters.status) queryParams.status = filters.status;
+    queryParams.category = filters.category;
 
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams,
-      queryParamsHandling: 'merge',
+    this.blogService.getBlogs(queryParams).subscribe({
+      next: response => {
+        this.blogs$ = response;
+        this.loading$.next(false);
+      },
+      error: error => {
+        console.error('BlogListComponent: Error fetching blogs:', error);
+      },
     });
+
+    // this.router.navigate([], {
+    //   relativeTo: this.route,
+    //   queryParams,
+    //   queryParamsHandling: 'merge',
+    // });
   }
 
   trackByBlog(index: number, blog: Blog): string {
